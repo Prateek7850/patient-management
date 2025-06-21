@@ -1,0 +1,18 @@
+package com.pm.mapper;
+
+import com.pm.dto.PatientResponseDto;
+import com.pm.model.Patient;
+
+public class DtoMapper {
+          
+	public static PatientResponseDto toDto(Patient patient) {
+		PatientResponseDto responseDto = new PatientResponseDto();
+		responseDto.setId(patient.getId().toString());
+        responseDto.setName(patient.getName().toString());
+		responseDto.setAddress(patient.getAddress().toString());
+		responseDto.setDateOfBirth(patient.getDateOfBirth().toString());
+		responseDto.setEmail(patient.getEmail());
+		responseDto.setRegisteredDate(patient.getRegisteredDate().toString());
+		return responseDto ;
+	}
+}

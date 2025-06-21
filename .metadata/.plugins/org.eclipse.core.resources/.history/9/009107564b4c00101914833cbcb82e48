@@ -1,0 +1,32 @@
+package com.pm.mapper;
+
+import java.time.LocalDate;
+
+import com.pm.dto.PatientRequestDTO;
+import com.pm.dto.PatientResponseDto;
+import com.pm.model.Patient;
+
+public class DtoMapper {
+          
+	public static PatientResponseDto toDto(Patient patient) {
+		PatientResponseDto responseDto = new PatientResponseDto();
+		responseDto.setId(patient.getId().toString());
+        responseDto.setName(patient.getName().toString());
+		responseDto.setAddress(patient.getAddress().toString());
+		responseDto.setDateOfBirth(patient.getDateOfBirth().toString());
+		responseDto.setEmail(patient.getEmail());
+		responseDto.setRegisteredDate(patient.getRegisteredDate().toString());
+		return responseDto ;
+	}
+	
+	public static Patient converToPatientObject(PatientRequestDTO patientDto) {
+		Patient patient = new Patient();
+	
+		patient.setName(patientDto.getName());
+		patient.setEmail(patientDto.getEmail());
+		patient.setAddress(patientDto.getAddress());
+		patient.setDateOfBirth(LocalDate.parse(patientDto.getDateOfBirth()));
+		patient.setRegisteredDate(LocalDate.parse(patientDto.getRegisteredDate()));
+		return patient;
+	}
+}

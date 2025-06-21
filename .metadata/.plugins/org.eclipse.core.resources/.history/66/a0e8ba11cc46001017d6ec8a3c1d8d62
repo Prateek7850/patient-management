@@ -1,0 +1,12 @@
+'-':
+- patient-management
+- root
+application: ''''''
+datasource: ''''''
+name: ''
+password: Assur@3260
+patient_service: ''''''''''''''
+port: 4000
+server: ''''''
+spring: ''''''
+url: jdbc:mysql://localhost:3306/patient_service

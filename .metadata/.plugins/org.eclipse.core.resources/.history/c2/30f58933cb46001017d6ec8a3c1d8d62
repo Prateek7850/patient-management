@@ -1,0 +1,8 @@
+patient_service: ''
+spring:
+  application:
+    name: patient-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/patient_service
+    name: root
+    password: Assur@3260

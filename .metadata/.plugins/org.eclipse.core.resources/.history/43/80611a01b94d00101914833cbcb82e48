@@ -1,0 +1,54 @@
+package com.pm.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.pm.dto.PatientRequestDTO;
+import com.pm.dto.PatientResponseDto;
+import com.pm.service.PatientService;
+import com.pm.validator.CreatePatientValidator;
+
+import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
+
+@RestController
+@RequestMapping("/patient")
+public class PatientController {
+
+	private PatientService patientService;
+
+	@Autowired
+	public PatientController(PatientService patientService) {
+		super();
+		this.patientService = patientService;
+	}
+
+	public PatientController() {
+		super();
+	}
+
+	@GetMapping
+	public ResponseEntity<List<PatientResponseDto>> getAllPatientList() {
+		List<PatientResponseDto> geAllPatients = patientService.geAllPatients();
+		return ResponseEntity.ok().body(geAllPatients);
+	}
+
+	@PostMapping
+	public ResponseEntity<PatientResponseDto> savePatient(@Validated({Default.class, CreatePatientValidator.class}) @RequestBody PatientRequestDTO patient) {
+		PatientResponseDto savePatient = patientService.savePatient(patient);
+		return ResponseEntity.ok().body(savePatient);
+	}
+
+	@PutMapping
+	public ResponseEntity<PatientResponseDto> updatePatient(@Validated(Default.class) @RequestBody PatientRequestDTO patient) {
+		PatientResponseDto updatePatient = patientService.updatePatient(patient);
+		return ResponseEntity.ok().body(updatePatient);
+	}
+}

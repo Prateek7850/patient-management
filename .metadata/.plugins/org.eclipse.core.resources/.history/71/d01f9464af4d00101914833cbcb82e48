@@ -1,0 +1,57 @@
+package com.pm.service;
+
+import java.time.LocalDate;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.pm.dto.PatientRequestDTO;
+import com.pm.dto.PatientResponseDto;
+import com.pm.exception.DuplicateEmailFoundExpection;
+import com.pm.exception.PatientNotFoundException;
+import com.pm.mapper.DtoMapper;
+import com.pm.model.Patient;
+import com.pm.repository.PatientRepository;
+
+@Service
+public class PatientServiceImpli implements PatientService {
+
+	private PatientRepository patientRepo;
+
+	@Autowired
+	public PatientServiceImpli(PatientRepository patientRepo) {
+		super();
+		this.patientRepo = patientRepo;
+	}
+
+	@Override
+	public List<PatientResponseDto> geAllPatients() {
+		List<Patient> patient = patientRepo.findAll();
+		List<PatientResponseDto> responseDto = patient.stream().map(patients -> DtoMapper.toDto(patients)).toList();
+		return responseDto;
+	}
+
+	@Override
+	public PatientResponseDto savePatient(PatientRequestDTO patient) {
+		if (patientRepo.existsByEmail(patient.getEmail())) {
+			throw new DuplicateEmailFoundExpection("Email already exists" + patient.getEmail());
+		}
+		Patient getPatientObj = DtoMapper.converToPatientObject(patient);
+		Patient save = patientRepo.save(getPatientObj);
+		PatientResponseDto responsePatient = DtoMapper.toDto(getPatientObj);
+		return responsePatient;
+	}
+
+	@Override
+	public PatientResponseDto updatePatient(PatientRequestDTO patient) {
+		Patient getPatient = patientRepo.findByEmail(patient.getEmail());
+		if(getPatient==null) {
+			throw new PatientNotFoundException("Patient Not Found");
+		}
+		getPatient.setName(patient.getName());
+		getPatient.setEmail(patient.getEmail());
+		getPatient.setAddress(patient.getAddress());
+		getPatient.setDateOfBirth(LocalDate.parse(patient.getDateOfBirth()));
+		return DtoMapper.toDto(getPatient);
+	}
+
+}

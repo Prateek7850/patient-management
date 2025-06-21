@@ -1,0 +1,15 @@
+package com.pm.service;
+
+import java.util.List;
+
+import com.pm.dto.PatientResponseDto;
+
+public class PatientServiceImpli implements PatientService {
+
+	@Override
+	public List<PatientResponseDto> geAllPatients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

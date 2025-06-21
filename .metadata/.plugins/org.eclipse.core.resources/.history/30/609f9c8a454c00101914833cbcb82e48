@@ -1,0 +1,17 @@
+package com.pm.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public class PatientRequestDTO {
+      
+	@NotBlank(message="Name should not be blank")
+	@Size(max=100,message="Size of name should not be more than 100")
+	private String name;
+	
+	@NotBlank(message="Email should not be blank")
+	@Email(message="Enter valid email")
+	private String email;
+	
+}

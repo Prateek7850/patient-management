@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: patientService
+  datasource:
+    password: Assur@3260
+    url: jdbc:mysql://localhost:3306/patient_service
+    username: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update

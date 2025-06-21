@@ -1,0 +1,38 @@
+package com.pm.dto;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+
+public class PatientResponseDto {
+ 
+	private String id;
+	private String name;
+	private String email;
+	private String address;
+	private LocalDate dateOfBirth;
+	private LocalDate registeredDate;
+	
+	
+	public PatientResponseDto() {
+		super();
+
+	}
+
+
+	public PatientResponseDto(String id, String name, String email, String address, LocalDate dateOfBirth,
+			LocalDate registeredDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+		this.registeredDate = registeredDate;
+	}
+	
+}

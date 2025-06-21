@@ -1,0 +1,5 @@
+package com.pm.dto;
+
+public class PatientRequestDTO {
+
+}

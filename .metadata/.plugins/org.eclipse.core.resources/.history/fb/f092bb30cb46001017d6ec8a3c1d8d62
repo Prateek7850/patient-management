@@ -1,0 +1,6 @@
+patient_service: ''
+spring:
+  application:
+    name: patient-management
+  datasource:
+    url: ''

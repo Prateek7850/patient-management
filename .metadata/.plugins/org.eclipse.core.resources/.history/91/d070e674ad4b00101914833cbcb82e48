@@ -1,0 +1,36 @@
+package com.pm.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.pm.dto.PatientResponseDto;
+import com.pm.model.Patient;
+import com.pm.repository.PatientRepository;
+
+@Service
+public class PatientServiceImpli implements PatientService {
+
+	private PatientRepository patientRepo;
+	
+	
+	@Autowired
+	public PatientServiceImpli(PatientRepository patientRepo) {
+		super();
+		this.patientRepo = patientRepo;
+	}
+
+
+
+	@Override
+	public List<PatientResponseDto> geAllPatients() {
+		List<Patient> findAll = patientRepo.findAll();
+		List<PatientResponseDto> responseDto = new ArrayList<>();
+		BeanUtils.copyProperties(findAll, responseDto);
+		return responseDto;
+	}
+
+}
