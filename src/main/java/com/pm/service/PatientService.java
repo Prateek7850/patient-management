@@ -1,0 +1,17 @@
+package com.pm.service;
+
+import java.util.List;
+
+import com.pm.dto.PatientRequestDTO;
+import com.pm.dto.PatientResponseDto;
+
+public interface PatientService {
+        
+	List<PatientResponseDto> geAllPatients();
+	
+	PatientResponseDto savePatient(PatientRequestDTO patient);
+	
+	PatientResponseDto updatePatient(PatientRequestDTO patient);
+	
+	void deletePatient(String id); 
+}
